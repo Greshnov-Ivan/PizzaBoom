@@ -1,0 +1,14 @@
+span {
+  display: block;
+}
+.order {
+  overflow-y: auto;
+  max-height: 300px;
+}
+.fas {
+  cursor: pointer;
+}
+.clear button{
+  float: right;
+}
+

@@ -1,0 +1,73 @@
+<div class="archive">
+  <div class="buttons">
+    <button (click)="this.updateStatus()" type="submit" class="btn btn-success">Обновить статусы <i class="fas fa-history"></i></button>
+    <button (click)="this.reverseIsVisible()" type="submit" class="btn btn-light"> Показать старые заказы </button>
+    <button (click)="this.appService.clearArchive()" type="submit" class="btn btn-danger">Очистить архив </button>
+    </div>
+  <div class="fresh" *ngIf="freshOrders.length>0">
+    <h5>Активные заказы:</h5>
+    <div *ngIf="this.errorAlert" class="alert alert-danger">
+      <strong>Ошибка!</strong> <a href="#" class="alert-link"> {{this.errorBuyMes}}</a>.
+    </div>
+    <table class="table table-hover table-sm">
+      <thead>
+      <tr>
+        <th scope="col">№ заказа</th>
+        <th scope="col">Название</th>
+        <th scope="col">Размер</th>
+        <th scope="col">Тесто</th>
+        <th scope="col">Допы</th>
+        <th scope="col">Цена</th>
+        <th scope="col">Статус</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let fresh of freshOrders; let i = index"  >
+      <tr *ngFor="let pizza of fresh.Pizzas; let j = index">
+        <th scope="row">{{fresh.Id}}</th>
+        <td>{{pizza.pizzaName}}</td>
+        <td>{{pizza.sizeName}}</td>
+        <td>{{pizza.doughName}}</td>
+        <td>
+          <span>{{pizza.freeIngr.length}}</span>
+        </td>
+        <td>{{pizza.price}}</td>
+        <td>{{this.appService.AllStatus[fresh.StatusId-1].Name}}</td>
+        <td><i title="Отменить заказ" (click)="this.cancellOrder(fresh.Id)" class="fas fa-minus"></i></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="already" *ngIf="alreadOrders.length>0">
+    <div class="old" *ngIf="isVisible">
+      <h5>Закрытые заказы:</h5>
+      <table class="table table-hover table-sm">
+        <thead>
+        <tr>
+          <th scope="col">№ заказа</th>
+          <th scope="col">Название</th>
+          <th scope="col">Размер</th>
+          <th scope="col">Тесто</th>
+          <th scope="col">Допы</th>
+          <th scope="col">Цена</th>
+          <th scope="col">Статус</th>
+        </tr>
+        </thead>
+        <tbody *ngFor="let alredy of alreadOrders; let i = index">
+        <tr *ngFor="let pizza of alredy.Pizzas; let j = index">
+          <th scope="row">{{alredy.Id}}</th>
+          <td>{{pizza.pizzaName}}</td>
+          <td>{{pizza.sizeName}}</td>
+          <td>{{pizza.doughName}}</td>
+          <td>
+            <span>{{pizza.freeIngr.length}}</span>
+          </td>
+          <td>{{pizza.price}}</td>
+          <td>{{this.appService.AllStatus[alredy.StatusId-1].Name}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

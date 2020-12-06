@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PizzaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="DetailsOrders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderId" Type="int" Nullable="false" />
+    <Property Name="PizzaId" Type="int" Nullable="false" />
+    <Property Name="SizeId" Type="int" Nullable="false" />
+    <Property Name="DoughId" Type="int" Nullable="false" />
+    <Property Name="FreeIngredientId" Type="int" />
+  </EntityType>
+  <EntityType Name="Doughs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ingredients">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="Free" Type="bit" Nullable="false" />
+    <Property Name="Weight" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+    <Property Name="Phone" Type="nchar" MaxLength="11" Nullable="false" />
+    <Property Name="StatusId" Type="int" Nullable="false" />
+    <Property Name="IsCancelled" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PizzaCombinations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="PizzaId" Type="int" Nullable="false" />
+    <Property Name="SizeId" Type="int" Nullable="false" />
+    <Property Name="DoughId" Type="int" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Weight" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PizzaIngredients">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="PizzaId" Type="int" Nullable="false" />
+    <Property Name="IngredientId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pizzas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sizes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Diameter" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_DetailsOrders_ToDoughs">
+    <End Role="Doughs" Type="Self.Doughs" Multiplicity="1" />
+    <End Role="DetailsOrders" Type="Self.DetailsOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doughs">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DetailsOrders">
+        <PropertyRef Name="DoughId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetailsOrders_ToOrders">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="DetailsOrders" Type="Self.DetailsOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DetailsOrders">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetailsOrders_ToPizzas">
+    <End Role="Pizzas" Type="Self.Pizzas" Multiplicity="1" />
+    <End Role="DetailsOrders" Type="Self.DetailsOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pizzas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DetailsOrders">
+        <PropertyRef Name="PizzaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetailsOrders_ToSizes">
+    <End Role="Sizes" Type="Self.Sizes" Multiplicity="1" />
+    <End Role="DetailsOrders" Type="Self.DetailsOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sizes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DetailsOrders">
+        <PropertyRef Name="SizeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_ToStatus">
+    <End Role="Status" Type="Self.Status" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PizzaCombinations_ToDoughs">
+    <End Role="Doughs" Type="Self.Doughs" Multiplicity="1" />
+    <End Role="PizzaCombinations" Type="Self.PizzaCombinations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doughs">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PizzaCombinations">
+        <PropertyRef Name="DoughId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PizzaCombinations_ToPizzas">
+    <End Role="Pizzas" Type="Self.Pizzas" Multiplicity="1" />
+    <End Role="PizzaCombinations" Type="Self.PizzaCombinations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pizzas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PizzaCombinations">
+        <PropertyRef Name="PizzaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PizzaCombinations_ToSizes">
+    <End Role="Sizes" Type="Self.Sizes" Multiplicity="1" />
+    <End Role="PizzaCombinations" Type="Self.PizzaCombinations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sizes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PizzaCombinations">
+        <PropertyRef Name="SizeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PizzaIngredients_ToIgredient">
+    <End Role="Ingredients" Type="Self.Ingredients" Multiplicity="1" />
+    <End Role="PizzaIngredients" Type="Self.PizzaIngredients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ingredients">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PizzaIngredients">
+        <PropertyRef Name="IngredientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PizzaIngredients_ToPizzas">
+    <End Role="Pizzas" Type="Self.Pizzas" Multiplicity="1" />
+    <End Role="PizzaIngredients" Type="Self.PizzaIngredients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pizzas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PizzaIngredients">
+        <PropertyRef Name="PizzaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PizzaDBModelStoreContainer">
+    <EntitySet Name="DetailsOrders" EntityType="Self.DetailsOrders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Doughs" EntityType="Self.Doughs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ingredients" EntityType="Self.Ingredients" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PizzaCombinations" EntityType="Self.PizzaCombinations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PizzaIngredients" EntityType="Self.PizzaIngredients" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pizzas" EntityType="Self.Pizzas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sizes" EntityType="Self.Sizes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_DetailsOrders_ToDoughs" Association="Self.FK_DetailsOrders_ToDoughs">
+      <End Role="Doughs" EntitySet="Doughs" />
+      <End Role="DetailsOrders" EntitySet="DetailsOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetailsOrders_ToOrders" Association="Self.FK_DetailsOrders_ToOrders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="DetailsOrders" EntitySet="DetailsOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetailsOrders_ToPizzas" Association="Self.FK_DetailsOrders_ToPizzas">
+      <End Role="Pizzas" EntitySet="Pizzas" />
+      <End Role="DetailsOrders" EntitySet="DetailsOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetailsOrders_ToSizes" Association="Self.FK_DetailsOrders_ToSizes">
+      <End Role="Sizes" EntitySet="Sizes" />
+      <End Role="DetailsOrders" EntitySet="DetailsOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_ToStatus" Association="Self.FK_Orders_ToStatus">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PizzaCombinations_ToDoughs" Association="Self.FK_PizzaCombinations_ToDoughs">
+      <End Role="Doughs" EntitySet="Doughs" />
+      <End Role="PizzaCombinations" EntitySet="PizzaCombinations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PizzaCombinations_ToPizzas" Association="Self.FK_PizzaCombinations_ToPizzas">
+      <End Role="Pizzas" EntitySet="Pizzas" />
+      <End Role="PizzaCombinations" EntitySet="PizzaCombinations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PizzaCombinations_ToSizes" Association="Self.FK_PizzaCombinations_ToSizes">
+      <End Role="Sizes" EntitySet="Sizes" />
+      <End Role="PizzaCombinations" EntitySet="PizzaCombinations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PizzaIngredients_ToIgredient" Association="Self.FK_PizzaIngredients_ToIgredient">
+      <End Role="Ingredients" EntitySet="Ingredients" />
+      <End Role="PizzaIngredients" EntitySet="PizzaIngredients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PizzaIngredients_ToPizzas" Association="Self.FK_PizzaIngredients_ToPizzas">
+      <End Role="Pizzas" EntitySet="Pizzas" />
+      <End Role="PizzaIngredients" EntitySet="PizzaIngredients" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

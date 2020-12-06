@@ -1,0 +1,34 @@
+<div class="card">
+  <div class="card-body">
+    <div *ngFor="let freein of pizza.FreeInCheck" class="custom-control form-control-sm custom-checkbox form-check">
+      <input (click)="selectIngredient(freein)"
+             class="custom-control-input" type="checkbox" [value]="freein.Checked"
+             id="fi_{{pizza.Id}}{{this.appService.freeIngredients[freein.Id].Id}}">
+      <label class="custom-control-label" for="fi_{{pizza.Id}}{{this.appService.freeIngredients[freein.Id].Id}}">
+        {{this.appService.freeIngredients[freein.Id].Name}}<br>
+        <b>{{this.appService.freeIngredients[freein.Id].Price}}</b>
+        <i class="fas fa-ruble-sign"></i>, {{this.appService.freeIngredients[freein.Id].Weight}}гр.
+      </label>
+    </div>
+    <div>
+      Размер:
+      <select #selsize (change)="selSizeOrDough('size', selsize.value)" class="form-control form-control-sm">
+        <option *ngFor="let size of appService.sizesAndDoughs.Sizes" [value]="size.Id">
+          {{size.Name}} {{size.Diameter}}см
+        </option>
+      </select>
+    </div>
+    <div>
+      Тесто:
+      <select #seldou (change)="selSizeOrDough('dough', seldou.value)" class="form-control form-control-sm">
+        <option *ngFor="let dough of appService.sizesAndDoughs.Doughs" [value]="dough.Id">
+          {{dough.Name}}
+        </option>
+      </select>
+    </div>
+    <div class="ok">
+      <h6>Цена: {{price}}<i class="fas fa-ruble-sign"></i></h6>
+      <button (click)="AddPizzaInBasket()" type="button" class="btn btn-success">Добавить в корзину</button>
+    </div>
+  </div>
+</div>

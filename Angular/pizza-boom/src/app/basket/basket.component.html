@@ -1,0 +1,26 @@
+<div class="basket">
+  <div *ngIf="!this.successAlert">
+    <app-order></app-order>
+    <div class="form-group">
+      <label>Телефон:</label>
+      <input #phone type="text" class="form-control"
+             title="Введите Ваш номер сотового телефона"
+             placeholder="В формате: 89*********">
+    </div>
+    <div *ngIf="this.errorNumber" class="alert alert-danger">
+      <strong>Ошибка!</strong> <a href="#" class="alert-link"> Некорректно запонено поле "Телефон". Требуемый формат: 89*********</a>.
+    </div>
+    <h4>
+      Итоговая цена: {{this.appService.allPrice}}<i class="fas fa-ruble-sign"></i>
+    </h4>
+    <button (click)="buy(phone.value)" type="submit" class="btn btn-success">Купить <i class="fab fa-amazon-pay"></i></button>
+  </div>
+  <div *ngIf="this.successAlert">
+    <div class="alert alert-success">
+      <strong>Успешно!</strong> <a href="#" class="alert-link"> Для мониторинга заказов перейдите в соответствующий раздел</a>.
+    </div>
+  </div>
+  <div *ngIf="this.errorAlert" class="alert alert-danger">
+    <strong>Ошибка!</strong> <a href="#" class="alert-link"> {{this.errorBuyMes}}</a>.
+  </div>
+</div>

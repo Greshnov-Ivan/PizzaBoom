@@ -1,0 +1,32 @@
+.pizza {
+  margin: 13px;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: orange;
+  width: 240px;
+  float:left;
+}
+.pizza button {
+  cursor: pointer
+}
+.pizza h2 {
+  margin-bottom: .5rem;
+}
+.pizza h6 {
+  color: darkred;
+}
+.ingred{
+  min-height: 110px;
+}
+button {
+  margin-bottom: 15px;
+}
+img {
+  max-width:100%;
+  height:auto;
+}
+
+label {
+  line-height:110%;
+}
+

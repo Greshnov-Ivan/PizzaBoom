@@ -1,0 +1,21 @@
+<div class="pizza">
+  <div>
+    <img src="{{imgUrl}}">
+  </div>
+  <h3>{{pizza.Name}}</h3>
+  <h6>от {{pizza.Combinations[0].Price}}<i class="fas fa-ruble-sign"></i></h6>
+  <div class="ingred">
+    <span *ngFor="let ingredient of pizza.Ingredients; let i = index">
+      <i *ngIf="i != pizza.Ingredients.length -1">{{ingredient.Name + ', '}}</i>
+      <i *ngIf="i == pizza.Ingredients.length -1">{{ingredient.Name}}</i>
+    </span>
+  </div>
+  <button type="button" class="btn btn-outline-light" (click)="selected()">Выбрать</button>
+  <div *ngIf="pizza.IsSelect">
+    <app-card
+    [pizza] = "pizza"
+    >
+    </app-card>
+  </div>
+
+</div>

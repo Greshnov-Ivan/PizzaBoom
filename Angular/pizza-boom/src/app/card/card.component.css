@@ -1,0 +1,23 @@
+.card {
+  border-radius: 10px;
+}
+.form-check {
+  text-align: left;
+  margin-bottom: 20px;
+}
+.fas {
+  font-size: 85%;
+}
+.size {
+  padding-right: 15px;
+}
+.custom-control-label:before{
+  background-color:#ffcccc;
+}
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before{
+  background-color:#ffc107;
+}
+.ok {
+  margin-top: 20px;
+}
+

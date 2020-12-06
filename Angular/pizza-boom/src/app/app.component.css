@@ -1,0 +1,108 @@
+.conteiner {
+  width: 800px;
+  margin: 0 auto;
+}
+.title {
+  display: inline-block;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  padding-left: 12px;
+}
+h1 {
+  padding-left: 5px;
+  float: left;
+  margin: 0px;
+  font-size: 280%;
+}
+h1 b {
+  color:darkred;
+}
+.logo {
+  float: left;
+  height: 80px;
+}
+.logo img {
+  max-height:100%;
+  wight:auto;
+}
+.archive {
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  z-index: 1;
+  height: 85px;
+  cursor: pointer;
+}
+.archive img {
+  max-height:100%;
+  wight:auto;
+}
+.basket {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  z-index: 1;
+  height: 60px;
+}
+.basket img {
+  max-height:100%;
+  wight:auto;
+  cursor: pointer;
+}
+.basketFull {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  z-index: 1;
+  height: 85px;
+  cursor: pointer;
+}
+.basketFull img {
+  max-height:100%;
+  wight:auto;
+}
+.price {
+  color: white;
+  padding: 5px!important;
+  border-radius: 5px;
+  background-color: darkred;
+}
+.price i {
+  font-size: 80%;
+}
+.orders {
+  color: white;
+  padding: 5px!important;
+  border-radius: 5px;
+  background-color: orange;
+}
+.orders i {
+  font-size: 80%;
+}
+.pizza {
+  display: inline-block;
+  text-align: center;
+}
+.pizza div {
+  display: inline-block;
+  vertical-align: top;
+}
+.modal-dialog {
+  max-width: 800px;
+  margin: 1.75rem auto;
+}
+.button {
+  padding: 0px!important;
+}
+.modal-header {
+  border: none;
+}
+.modal-header .close
+{
+  padding: 0px!important;
+  margin-right: 3px;
+}
+.empty {
+  text-align: center;
+  color: orange;
+}
